@@ -20,7 +20,7 @@
 //sends request to get shows, and pushes data into an array
 async function searchShows(query) {
   const movieData = [];
-  const response = await axios.get(`http://api.tvmaze.com/search/shows`, { params: { q: query }})
+  const response = await axios.get(`https://api.tvmaze.com/search/shows`, { params: { q: query }})
   for (let movie of response.data) {
     if(movie.show.image === null) {
       movie.show.image = 'https://i.stack.imgur.com/y9DpT.jpg';
@@ -90,7 +90,7 @@ $("#search-form").on("submit", async function handleSearch (evt) {
 // sends request to get episodes of a show using particular show id
 async function getEpisodes(id) {
   const episodeData = [];
-  const response = await axios.get(`http://api.tvmaze.com/shows/${id}/episodes`);
+  const response = await axios.get(`https://api.tvmaze.com/shows/${id}/episodes`);
   for(let episode of response.data) {
     episodeData.push({
       id: episode.id,
