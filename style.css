@@ -1,0 +1,5 @@
+.card-body {
+    border: 1px solid rgba(220, 234, 242, 0.5);
+    padding: 0.5em;
+    margin: 0.5em;
+}

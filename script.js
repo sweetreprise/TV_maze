@@ -53,7 +53,7 @@ function populateShows(shows) {
              <h5 class="card-title">${show.name}</h5>
              <img class="card-img-top" src="${show.image}">
              <p class="card-text">${show.summary}</p>
-             <button class="reveal-eps">Episodes</button>
+             <button type="button" class="btn btn-info btn-lg reveal-eps" data-toggle="modal" data-target="#episode-modal">Episodes</button>
            </div>
          </div>
        </div>
@@ -102,7 +102,7 @@ async function getEpisodes(id) {
   return episodeData;
 }
 
-//appends episodes to episodes-list UL
+//appends episodes to episodes-list UL, adds a modal to display episodes
 function populateEpisodes(episodes) {
   const $episodesList = $('#episodes-list');
   $episodesList.empty();
@@ -111,7 +111,26 @@ function populateEpisodes(episodes) {
     let $ep = $(`<li>${episode.name} (Season: ${episode.season}, Ep: ${episode.number})</li>`);
     $episodesList.append($ep);
   }
-  $(".card-body").append($('#episodes-area'));
+  let $episodeModal = $(` 
+  <div class="modal fade" id="episode-modal" role="dialog">
+    <div class="modal-dialog">
+  
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Episodes</h4>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    
+    </div>
+  </div>`)
+  $('#episodes-area').append($episodeModal);
+  $('.modal-body').append($episodesList);
   $('#episodes-area').show();
 }
 
