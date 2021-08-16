@@ -105,17 +105,19 @@ async function getEpisodes(id) {
 //appends episodes to episodes-list UL
 function populateEpisodes(episodes) {
   const $episodesList = $('#episodes-list');
+  $episodesList.empty();
+
   for(let episode of episodes) {
     let $ep = $(`<li>${episode.name} (Season: ${episode.season}, Ep: ${episode.number})</li>`);
     $episodesList.append($ep);
   }
-  $(".card").append($('#episodes-area'));
+  $(".card-body").append($('#episodes-area'));
   $('#episodes-area').show();
 }
 
 //listens for a click on the reveal-eps button on our shows-list div, then populates the episodes
 $("#shows-list").on('click', '.reveal-eps', async function revealEpisodes(e) {
-  const id = $(e.target).closest(".card").data("show-id");
-  let episodes = await getEpisodes(id);
-  populateEpisodes(episodes);
+    let id = $(e.target).closest(".card").data("show-id");
+    let episodes = await getEpisodes(id);
+    populateEpisodes(episodes);
 });
